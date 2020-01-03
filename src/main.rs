@@ -112,10 +112,7 @@ where
 
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
-    let stdin = io::stdin();
-    let stdin = io::BufReader::new(stdin);
-    let lines = stdin.lines();
-    let mut tokens = TokenStream::new(lines);
+    let mut tokens = TokenStream::new(io::BufReader::new(io::stdin()).lines());
     let mut stdout = io::stdout();
     while let Some(tok) = tokens.next().await {
         let out = format!("tok: {:?}\n", tok);
